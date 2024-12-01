@@ -36,10 +36,27 @@ int main() {
 
     int sum = 0;
     for (int i = 0; i < 1000; ++i) {
-        sum += (a[i] > b[i]) ? (a[i] - b[i]) : (b[i] - a[i]);
+        sum += abs(a[i] - b[i]);
+    }
+
+    int score = 0, j = 0, prev_score = 0;
+    for (int i = 0; i < 1000; ++i) {
+        if (i > 0 && a[i] == a[i - 1]) {
+            score += prev_score;
+            continue;
+        }
+
+        int count = 0;
+        while (j < 1000 && b[j] <= a[i]) {
+            if (b[j] == a[i]) count++;
+            j++;
+        }
+        prev_score = a[i] * count;
+        score += prev_score;
     }
 
     cout << sum << endl;
+    cout << score << endl;
 
     return 0;
 }
