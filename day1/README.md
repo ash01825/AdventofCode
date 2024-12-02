@@ -1,5 +1,3 @@
-Here’s a detailed README for Day 1: Historian Hysteria:
-
 Day 1: Historian Hysteria 🎄
 
 Problem Statement
