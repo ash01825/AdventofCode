@@ -10,7 +10,7 @@ bool isValid(int row,int col,size_t rows,size_t columns)
     return false;
 }
 
-int Xmas(const vector<vector<char> > &matrix,int i,int j,size_t rows,size_t columns)
+int Xmas1(const vector<vector<char> > &matrix, const int i, const int j, const size_t rows, const size_t columns)
 {
     int count=0;
     vector<pair<int,int> > offsets = {{-1,-1}, {-1,0}, {-1,1},{0,-1}, {0,1},{1,-1}, {1,0}, {1,1}};
@@ -34,6 +34,32 @@ int Xmas(const vector<vector<char> > &matrix,int i,int j,size_t rows,size_t colu
     return count;
 }
 
+int Xmas2(const vector<vector<char> > &matrix,const int i, const int j,const size_t rows,const
+    size_t columns)
+{
+    int count=0;
+    const vector<pair<int,int> > offsets = {{-1,-1}, {-1,1}, {1,1},  {1,-1}};
+    for (int c = 0; c<2; c++) {
+        int my = i + offsets[c].first;
+        int mx = j + offsets[c].second;
+        if(isValid(my,mx,rows,columns)&&(matrix[my][mx]=='M'))
+        {
+            my = i + offsets[c+2].first;
+            mx = j + offsets[c+2].second;
+            if(isValid(my,mx,rows,columns)&&(matrix[my][mx]=='S'))
+                count++;
+        }
+        else if(isValid(my,mx,rows,columns)&&(matrix[my][mx]=='S'))
+        {
+            my = i + offsets[c+2].first;
+            mx = j + offsets[c+2].second;
+            if(isValid(my,mx,rows,columns)&&(matrix[my][mx]=='M'))
+                count++;
+        }
+    }
+    return count/2;
+}
+
 
 int main()
 {
@@ -46,16 +72,23 @@ int main()
         for(char c : text)
             matrix.back().push_back(c);  // Push characters to the last row
     }
-    int count = 0;
+    int count1 = 0;
+    int count2 = 0;
     size_t a = matrix.size();
     size_t b = matrix[0].size();
     for(int i = 0; i < a; i++)
     {
         for(int j = 0; j < b; j++)
+        {
             if(matrix[i][j] == 'X')
-                count+=Xmas(matrix,i,j,a,b);
+                count1+=Xmas1(matrix,i,j,a,b);
+            if(matrix[i][j] == 'A')
+                count2+=Xmas2(matrix,i,j,a,b);
+        }
+
 
     }
-    cout << count << endl;
+    cout << count1 << endl;
+    cout << count2 << endl;
     return 0;
 }
