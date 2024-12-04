@@ -1,11 +1,10 @@
 #include <fstream>
-#include <stdio.h>
 #include <string>
 
 
 int main()    {
     std::string text;
-    std::ifstream file("./input.txt");
+    std::ifstream file("/Users/ash/CLionProjects/AdventofCode/day3/input.txt");
     std::string str = "";
 
     while (getline(file, text)) {
