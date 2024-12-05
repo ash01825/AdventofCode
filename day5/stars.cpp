@@ -20,7 +20,7 @@ int getcorrect(const vector<vector<int>> & map, vector<int> & x,const int size)
     return x[size/2];
 }
 
-int checkcorrect(const vector<vector<int>>& map, const string& line) {
+int checkcorrect1(const vector<vector<int>>& map, const string& line) {
     vector<int> b;
     stringstream ss(line);
     string token;
@@ -37,7 +37,23 @@ int checkcorrect(const vector<vector<int>>& map, const string& line) {
     }
     const int mid = size / 2;
     return b[mid];
-
+    }
+int checkcorrect2(const vector<vector<int>>& map, const string& line) {
+    vector<int> b;
+    stringstream ss(line);
+    string token;
+    while (getline(ss, token, ',')) {
+        int k = stoi(token);
+        b.push_back(k);
+    }
+    const int size = b.size();
+    for (int i = 0; i < size; ++i)
+    {
+        for (int j = i; j < size; ++j)
+            if(map[b[i]][b[j]]==1)
+                return getcorrect(map,b,size);
+    }
+    return 0;
 }
 int main()
 {
@@ -55,11 +71,12 @@ int main()
     }
 
     getline(fin, line);
-    int mid;
+    int mid1,mid2;
     while(getline(fin, line))
     {
-        mid+= checkcorrect(map, line);
+        mid1+= checkcorrect1(map, line);
+        mid2+= checkcorrect2(map, line)
     }
-    cout << mid - 4957<< endl;
+    cout << mid1<<endl<< mid2 <<endl;
 
 }
