@@ -5,9 +5,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-using namespace std;
-
-#include <sstream>
 #include <vector>
 #include <ranges>
 using namespace std;
@@ -75,7 +72,7 @@ int main()
     while(getline(fin, line))
     {
         mid1+= checkcorrect1(map, line);
-        mid2+= checkcorrect2(map, line)
+        mid2+= checkcorrect2(map, line);
     }
     cout << mid1<<endl<< mid2 <<endl;
 
