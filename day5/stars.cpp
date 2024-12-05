@@ -26,12 +26,9 @@ int checkcorrect1(const vector<vector<int>>& map, const string& line) {
         b.push_back(k);
     }
     const int size = b.size();
-    for (int i = 0; i < size; ++i)
-    {
-        for (int j = i; j < size; ++j)
-            if(map[b[i]][b[j]]==1)
+    for (int i = 0; i < size-1; ++i)
+        if(map[b[i]][b[i+1]]==1)
                 return 0;
-    }
     const int mid = size / 2;
     return b[mid];
     }
@@ -44,12 +41,9 @@ int checkcorrect2(const vector<vector<int>>& map, const string& line) {
         b.push_back(k);
     }
     const int size = b.size();
-    for (int i = 0; i < size; ++i)
-    {
-        for (int j = i; j < size; ++j)
-            if(map[b[i]][b[j]]==1)
+    for (int i = 0; i < size-1; ++i)
+            if(map[b[i]][b[i+1]]==1)
                 return getcorrect(map,b,size);
-    }
     return 0;
 }
 int main()
