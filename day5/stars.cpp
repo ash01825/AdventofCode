@@ -33,7 +33,7 @@ int checkcorrect1(const vector<vector<int>>& map, const string& line) {
     {
         for (int j = i; j < size; ++j)
             if(map[b[i]][b[j]]==1)
-                return getcorrect(map,b,size);
+                return 0;
     }
     const int mid = size / 2;
     return b[mid];
