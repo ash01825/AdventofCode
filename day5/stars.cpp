@@ -12,43 +12,11 @@ using namespace std;
 #include <ranges>
 using namespace std;
 
-void merge(const vector<vector<int>> & map, vector<int> & x, int start,int mid,int end)
-{
-    int n1=mid-start+1;
-    int n2=end-mid;
-    vector<int> y(n1),z(n2);
-    for(int i=0;i<n1;i++)
-        y[i]=x[start+i];
-    for(int i=0;i<n2;i++)
-        z[i]=x[mid+i+1];
-    int i = 0, j = 0;
-    int k = start;
-    while(i<n1 && j<n2)
-    {
-        if(map[y[i]][z[j]]==0)
-            x[k++]=y[i++];
-        else
-            x[k++]=z[j++];
-    }
-    while(i<n1)
-        x[k++]=y[i++];
-    while(j<n2)
-        x[k++]=z[j++];
-}
-
-void merge_sort(const vector<vector<int>> & map, vector<int> & x, int start,int end)
-{
-    if(start>=end)
-        return;
-    const int mid = start + (end-start)/2;
-    merge_sort(map, x, start, mid);
-    merge_sort(map, x, mid+1, end);
-    merge(map, x, start, mid, end);
-}
-
 int getcorrect(const vector<vector<int>> & map, vector<int> & x,const int size)
 {
-    merge_sort(map,x,0,size-1);
+    ranges::sort(x, [&map](int a, int b) {
+        return map[a][b] == 0;
+    });
     return x[size/2];
 }
 
