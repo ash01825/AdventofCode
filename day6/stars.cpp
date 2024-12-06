@@ -1,9 +1,6 @@
 //
 // Created by Arsh Tulshyan on 06/12/24.
 //
-//
-// Created by Arsh Tulshyan on 06/12/24.
-//
 #include <fstream>
 #include <iostream>
 using namespace std;
