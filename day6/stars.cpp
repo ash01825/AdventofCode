@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 using namespace std;
+using namespace std::chrono;
 bool isValid(int row,int col,size_t rows,size_t columns)
 {
     if(row>=0&&row<rows&&col<columns&&col>=0)
@@ -55,10 +56,13 @@ void moveFront(pair<size_t,size_t> &pos, const bool &left, const bool &right, co
     else if(down)
         pos.first++;
 }
-
-int move(vector<vector<char>> &matrix,pair<size_t,size_t> &pos,bool &left,bool &right,bool &up,bool &down)
+int moveAdd(vector<vector<char>> &matrix,pair<size_t,size_t> &pos)
 {
     int count = 0;
+    bool right=false;
+    bool down=false;
+    bool up=true;
+    bool left=false;
     const size_t rows = matrix.size();
     const size_t columns = matrix[0].size();
     while(isValid(pos.first,pos.second,rows,columns))
@@ -66,7 +70,39 @@ int move(vector<vector<char>> &matrix,pair<size_t,size_t> &pos,bool &left,bool &
         if(matrix[pos.first][pos.second]=='.' || matrix[pos.first][pos.second]=='^')
         {
             matrix[pos.first][pos.second]='X';
-            count+=1;
+            count = 0;
+        }
+        if(matrix[pos.first][pos.second]=='X')
+        {
+            moveFront(pos,left,right,up,down);
+            count++;
+        }
+        else if(matrix[pos.first][pos.second]=='#')
+        {
+            moveBack(pos,left,right,up,down);
+            turnRight(left,right,up,down);
+            count--;
+        }
+        if(count==131)
+            return 1;
+    }
+    return 0;
+}
+vector<pair<size_t,size_t>> moveVisited(vector<vector<char>> &matrix,pair<size_t,size_t> &pos)
+{
+    vector<pair<size_t,size_t>> visited;
+    bool right=false;
+    bool down=false;
+    bool up=true;
+    bool left=false;
+    const size_t rows = matrix.size();
+    const size_t columns = matrix[0].size();
+    while(isValid(pos.first,pos.second,rows,columns))
+    {
+        if(matrix[pos.first][pos.second]=='.' || matrix[pos.first][pos.second]=='^')
+        {
+            matrix[pos.first][pos.second]='X';
+            visited.emplace_back(pos.first,pos.second);
         }
         if(matrix[pos.first][pos.second]=='X')
             moveFront(pos,left,right,up,down);
@@ -76,24 +112,25 @@ int move(vector<vector<char>> &matrix,pair<size_t,size_t> &pos,bool &left,bool &
             turnRight(left,right,up,down);
         }
     }
-    return count;
+    return visited;
 }
 
-int numOfPositions(vector<vector<char>> &matrix,pair<size_t,size_t> &pos)
+int bruteforce(vector<vector<char>> &matrix,pair<size_t,size_t> &pos,vector<pair<size_t,size_t>> &visited)
 {
-    int sum=0;
-    bool right=false;
-    bool down=false;
-    bool up=true;
-    bool left=false;
-    size_t rows = matrix.size();
-    size_t columns = matrix[0].size();
-    return move(matrix,pos,left,right,up,down);
-
+    int count = 0;
+    for(int row=1;row<visited.size();row++)
+    {
+        auto tempMat = matrix;
+        tempMat[visited[row].first][visited[row].second]='#';
+        auto tempPos = pos;
+        count+=moveAdd(tempMat,tempPos);
+    }
+    return count;
 
 }
 int main()
 {
+    auto start = high_resolution_clock::now();
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     ifstream f("/Users/ash/CLionProjects/AdventofCode/day6/input.txt");
@@ -113,7 +150,15 @@ int main()
         }
         // Push characters to the last row
     }
-    cout<<numOfPositions(matrix,positions)<<endl;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    auto tempMat = matrix;
+    auto tempPos = positions;
+    auto visited = moveVisited(tempMat,tempPos);
+    cout<<visited.size()<<endl;
+    cout<<bruteforce(matrix,positions,visited)<<endl;
+    cout << "Time taken by function: "
+     << duration.count() << " microseconds" << endl;
 
 
 
