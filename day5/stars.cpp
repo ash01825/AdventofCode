@@ -8,6 +8,7 @@
 #include <vector>
 #include <ranges>
 using namespace std;
+using namespace std::chrono;
 
 int getcorrect(const vector<vector<int>> & map, vector<int> & x,const int size)
 {
@@ -48,6 +49,9 @@ int checkcorrect2(const vector<vector<int>>& map, const string& line) {
 }
 int main()
 {
+    auto start = high_resolution_clock::now();
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
     ifstream fin("/Users/ash/CLionProjects/AdventofCode/day5/input.txt");
     string line;
     vector<vector<int>> map(100, vector<int>(100, 0));
@@ -68,6 +72,10 @@ int main()
         mid1+= checkcorrect1(map, line);
         mid2+= checkcorrect2(map, line);
     }
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
     cout << mid1<<endl<< mid2 <<endl;
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
 
 }

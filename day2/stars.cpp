@@ -9,6 +9,7 @@
 #include <sstream>
 
 using namespace std;
+using namespace std::chrono;
 
 
 int check_safety(vector<int> &arr, bool k)
@@ -79,10 +80,11 @@ int check_safety(vector<int> &arr, bool k)
     return 0;
 }
 int main() {
+    auto start = high_resolution_clock::now();
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    ifstream input("input.txt");
+    ifstream input("/Users/ash/CLionProjects/AdventofCode/day2/input.txt");
     if (!input.is_open()) {
         cerr << "Error: Unable to open input file." << endl;
         return 1;
@@ -102,6 +104,10 @@ int main() {
     {
         safe+=check_safety(row,true);
     }
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
     cout << safe << "\n";
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
     return 0;
 }
