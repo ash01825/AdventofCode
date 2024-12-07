@@ -148,7 +148,6 @@ int main()
                  positions.second= matrix[positions.first].size()-1;
             }
         }
-        // Push characters to the last row
     }
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
@@ -159,8 +158,4 @@ int main()
     cout<<bruteforce(matrix,positions,visited)<<endl;
     cout << "Time taken by function: "
      << duration.count() << " microseconds" << endl;
-
-
-
-
 }

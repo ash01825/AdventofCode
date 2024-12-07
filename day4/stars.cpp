@@ -34,8 +34,7 @@ int Xmas1(const vector<vector<char> > &matrix, const int i, const int j, const s
     return count;
 }
 
-int Xmas2(const vector<vector<char> > &matrix,const int i, const int j,const size_t rows,const
-    size_t columns)
+int Xmas2(const vector<vector<char> > &matrix,const int i, const int j,const size_t rows,const size_t columns)
 {
     int count=0;
     const vector<pair<int,int> > offsets = {{-1,-1}, {-1,1}, {1,1},  {1,-1}};

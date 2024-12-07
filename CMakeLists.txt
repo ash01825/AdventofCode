@@ -16,11 +16,10 @@ add_executable(day1 day1/stars.cpp)
 add_executable(day2 day2/stars.cpp)
 add_executable(day3 day3/stars.cpp)
 add_executable(day4 day4/stars.cpp)
-add_executable(day5 day5/stars.cpp
-        day5/stars.cpp)
-add_executable(day6 day6/stars.cpp
-        day6/stars.cpp)
-
+add_executable(day5 day5/stars.cpp)
+add_executable(day6 day6/stars.cpp)
+add_executable(day7 day7/stars.cpp
+        day7/stars.cpp)
 
 # Optional: Add include directories (if needed)
 # target_include_directories(day1 PUBLIC include)
