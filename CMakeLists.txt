@@ -20,10 +20,4 @@ add_executable(day5 day5/stars.cpp)
 add_executable(day6 day6/stars.cpp)
 add_executable(day7 day7/stars.cpp
         day7/stars.cpp)
-
-# Optional: Add include directories (if needed)
-# target_include_directories(day1 PUBLIC include)
-# target_include_directories(day2 PUBLIC include)
-
-# Optional: If you need to link libraries
-# target_link_libraries(day1 PUBLIC some_library)
+add_executable(day8 day8/stars.cpp)

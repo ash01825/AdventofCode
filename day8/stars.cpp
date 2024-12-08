@@ -129,6 +129,6 @@ int main()
         ans2+=countAntenna2(row.second,v);
     }
     cout<<ans<<endl;
-    cout<<ans2<<endl;
+    cout<<ans2+ans<<endl;
 
 }
