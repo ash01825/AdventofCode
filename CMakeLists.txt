@@ -22,3 +22,5 @@ add_executable(day7 day7/stars.cpp
         day7/stars.cpp)
 add_executable(day8 day8/stars.cpp)
 add_executable(day9 day9/stars.cpp)
+add_executable(day10 day10/stars.cpp)
+add_executable(day11 day11/stars.cpp)
